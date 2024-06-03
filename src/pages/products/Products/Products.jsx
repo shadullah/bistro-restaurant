@@ -2,26 +2,39 @@ import khawon from "../../../assets/menu/pizza-bg.jpg";
 import axios from "axios";
 
 const Products = () => {
-  const handleOrder = async () => {
+  const pay = async () => {
     try {
-      await axios
-        .post("http://localhost:5000/bkash-checkout", {
-          amount: 10,
-          callbackURL: "http://localhost:5000/bkash-callback",
-          orderID: "01",
-          reference: "01",
-        })
-        .then((res) => {
-          console.log(res);
-          window.location.href = res?.data;
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      const { data } = await axios.post(
+        "http://localhost:5000/api/bkash/payment/create",
+        { amount: 50, orderId: 1 },
+        { withCredentials: true }
+      );
+      window.location.href = data.bkashURL;
     } catch (error) {
-      console.log(error);
+      console.log(error.response.data);
     }
   };
+
+  // const handleOrder = async () => {
+  //   try {
+  //     await axios
+  //       .post("http://localhost:5000/bkash-checkout", {
+  //         amount: 10,
+  //         callbackURL: "http://localhost:5000/bkash-callback",
+  //         orderID: "01",
+  //         reference: "01",
+  //       })
+  //       .then((res) => {
+  //         console.log(res);
+  //         window.location.href = res?.data;
+  //       })
+  //       .catch((e) => {
+  //         console.log(e);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div>
@@ -59,7 +72,7 @@ const Products = () => {
 
           <button
             className="bg-yellow-800 px-10 py-3 rounded-lg text-white text-center"
-            onClick={handleOrder}
+            onClick={pay}
           >
             Buy Now
           </button>

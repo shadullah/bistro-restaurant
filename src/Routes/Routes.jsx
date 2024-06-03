@@ -7,6 +7,8 @@ import Signup from "../pages/signup/Signup";
 import Dashboard from "../Layout/Dashboard";
 import PaymentDetails from "../pages/Dashboard/payment/PaymentDetails";
 import Users from "../pages/Dashboard/allusers/Users";
+import PaymentSuccess from "../pages/paymentSuccess/PaymentSuccess";
+import PaymentFail from "../pages/PaymentFail/PaymentFail";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +30,14 @@ export const router = createBrowserRouter([
       {
         path: "signup",
         element: <Signup></Signup>,
+      },
+      {
+        path: "success",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "fail",
+        element: <PaymentFail></PaymentFail>,
       },
     ],
   },
